@@ -1,0 +1,30 @@
+{
+  "name": "math-eval",
+  "version": "1.0.0",
+  "description": "Solves math strings",
+  "main": "dist/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kpfromer/math-eval.git"
+  },
+  "keywords": [
+    "math",
+    "eval",
+    "ast"
+  ],
+  "author": "Kyle Pfromer",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kpfromer/math-eval/issues"
+  },
+  "homepage": "https://github.com/kpfromer/math-eval#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-nodemon": "^2.4.1",
+    "gulp-typescript": "^5.0.0-alpha.3",
+    "typescript": "^3.1.6"
+  }
+}
