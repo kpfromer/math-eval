@@ -21,4 +21,15 @@ export class ASTNode {
     })
     return this.solve(...values);
   }
+
+  public getVariableNames(): Set<string> {
+    return this.args.reduce((set, arg) => {
+      if (arg instanceof ASTNode) {
+        return new Set([...set, ...arg.getVariableNames()])
+      } else if (arg instanceof Variable) {
+        return new Set([...set, arg.name]);
+      }
+      return set;
+    }, new Set())
+  }
 }
