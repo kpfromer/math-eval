@@ -62,6 +62,13 @@ export class MathParser {
     ] as MathFunction[];
   }
 
+  config() {
+    return {
+      functions: this.mathFunctions,
+      operators: this.mathOperators
+    } as NodeTypes;
+  }
+
   addFunction(func: MathFunction) {
     this.mathFunctions.push(func);
   }
@@ -70,12 +77,19 @@ export class MathParser {
     this.mathOperators.push(operator);
   }
 
+  hasVariables(expression: string): boolean | string[] {
+    const value = createAbstractSyntaxTree(tokenize(this.config())(expression), this.config());
+    if (value instanceof ASTNode) {
+      const variables = [...value.getVariableNames()];
+      if (variables.length > 0) {
+        return variables;
+      }
+    }
+    return false;
+  }
+
   solve(expression: string, variableList: { [name: string]: number } = {}): number {
-    const config = {
-      functions: this.mathFunctions,
-      operators: this.mathOperators
-    } as NodeTypes;
-    const value = createAbstractSyntaxTree(tokenize(config)(expression), config);
+    const value = createAbstractSyntaxTree(tokenize(this.config())(expression), this.config());
     if (value instanceof ASTNode) {
       return value.evaluate(variableList);
     } else if (value instanceof Variable) {
